@@ -1,0 +1,19 @@
+package com.example.rabbitmq.producer.object;
+
+import com.example.rabbitmq.vo.Student;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ObjectSender {
+
+	@Autowired
+	private AmqpTemplate rabbitTemplate;
+
+	public void send(Student user) {
+		System.out.println("Sender object: " + user.toString());
+		this.rabbitTemplate.convertAndSend("object", user);
+	}
+
+}
